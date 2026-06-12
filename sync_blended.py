@@ -30,45 +30,19 @@ course_users = moodle_call("core_enrol_get_enrolled_users", {
     "courseid": COURSE_ID
 })
 
-cohort_members = moodle_call("core_cohort_get_cohort_members", {
-    "cohortids[0]": COHORT_ID
-})
+print(f"Usuarios encontrados en el curso: {len(course_users)}")
 
-course_user_ids = {int(user["id"]) for user in course_users}
+params = {}
+for i, user in enumerate(course_users):
+    params[f"members[{i}][cohorttype][type]"] = "id"
+    params[f"members[{i}][cohorttype][value]"] = COHORT_ID
+    params[f"members[{i}][usertype][type]"] = "id"
+    params[f"members[{i}][usertype][value]"] = user["id"]
 
-current_cohort_ids = set()
-for cohort in cohort_members:
-    if int(cohort["cohortid"]) == COHORT_ID:
-        current_cohort_ids = {int(userid) for userid in cohort["userids"]}
-
-to_add = sorted(course_user_ids - current_cohort_ids)
-to_remove = sorted(current_cohort_ids - course_user_ids)
-
-print(f"Usuarios en curso: {len(course_user_ids)}")
-print(f"Usuarios en cohorte: {len(current_cohort_ids)}")
-print(f"A añadir: {len(to_add)}")
-print(f"A eliminar: {len(to_remove)}")
-
-if to_add:
-    params = {}
-    for i, userid in enumerate(to_add):
-        params[f"members[{i}][cohorttype][type]"] = "id"
-        params[f"members[{i}][cohorttype][value]"] = COHORT_ID
-        params[f"members[{i}][usertype][type]"] = "id"
-        params[f"members[{i}][usertype][value]"] = userid
-
+if params:
     moodle_call("core_cohort_add_cohort_members", params)
-    print("Usuarios añadidos correctamente.")
+    print(f"Usuarios añadidos/sincronizados en la cohorte {COHORT_ID}: {len(course_users)}")
+else:
+    print("No hay usuarios para añadir.")
 
-if to_remove:
-    params = {}
-    for i, userid in enumerate(to_remove):
-        params[f"members[{i}][cohorttype][type]"] = "id"
-        params[f"members[{i}][cohorttype][value]"] = COHORT_ID
-        params[f"members[{i}][usertype][type]"] = "id"
-        params[f"members[{i}][usertype][value]"] = userid
-
-    moodle_call("core_cohort_delete_cohort_members", params)
-    print("Usuarios eliminados correctamente.")
-
-print("Sincronización finalizada.")
+print("Proceso finalizado.")
