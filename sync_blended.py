@@ -5,7 +5,7 @@ MOODLE_URL = os.environ["MOODLE_URL"].rstrip("/")
 TOKEN = os.environ["MOODLE_TOKEN"]
 
 COURSE_ID = 3267
-COHORT_ID = 7887
+COHORT_ID = 1
 
 def moodle_call(function, params):
     response = requests.post(
