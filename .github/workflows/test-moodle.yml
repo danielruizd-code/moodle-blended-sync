@@ -1,10 +1,12 @@
-name: Test Moodle API
+name: Sync Moodle Blended Cohort
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
 
 jobs:
-  test:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
