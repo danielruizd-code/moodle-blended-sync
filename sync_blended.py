@@ -54,14 +54,13 @@ print(f"Usuarios en cohorte: {len(current_cohort_ids)}")
 print(f"A añadir: {len(to_add)}")
 print(f"A eliminar: {len(to_remove)}")
 
+
 # Altas
 if to_add:
     params = {}
     for i, userid in enumerate(to_add):
-        params[f"members[{i}][cohorttype][type]"] = "id"
-        params[f"members[{i}][cohorttype][value]"] = COHORT_ID
-        params[f"members[{i}][usertype][type]"] = "id"
-        params[f"members[{i}][usertype][value]"] = userid
+        params[f"members[{i}][cohortid]"] = COHORT_ID
+        params[f"members[{i}][userid]"] = userid
 
     moodle_call("core_cohort_add_cohort_members", params)
     print("Usuarios añadidos correctamente.")
@@ -70,10 +69,8 @@ if to_add:
 if to_remove:
     params = {}
     for i, userid in enumerate(to_remove):
-        params[f"members[{i}][cohorttype][type]"] = "id"
-        params[f"members[{i}][cohorttype][value]"] = COHORT_ID
-        params[f"members[{i}][usertype][type]"] = "id"
-        params[f"members[{i}][usertype][value]"] = userid
+        params[f"members[{i}][cohortid]"] = COHORT_ID
+        params[f"members[{i}][userid]"] = userid
 
     moodle_call("core_cohort_delete_cohort_members", params)
     print("Usuarios eliminados correctamente.")
