@@ -1,4 +1,4 @@
-<img width="2448" height="435" alt="image" src="https://github.com/user-attachments/assets/da5a7578-f579-40fe-b05f-18a40603bee3" />Esta tarea programada fue creada ante la necesidad de crear una herramienta externa para Moodle capaz de sincronizar los participantes de un aula concreta con una cohorte en específico.
+Esta tarea programada fue creada ante la necesidad de crear una herramienta externa para Moodle capaz de sincronizar los participantes de un aula concreta con una cohorte en específico.
 De esta forma, la tarea actualizará los miembros de esta cohorte (utilizada para restringir el acceso a ciertas aulas/secciones/actividades) en la plataforma Moodle en función de la actualización de participantes de este aula.
 La actualización de alumnos matriculados en este aula estará gestionada por ALEXIA, es decir, la gestión de matrículas del módulo se maneja a través de Alexia, pero no se puede automatricular a su vez dentro de cohortes en este portal (sí en grupos, pero no cohortes).
 
@@ -55,3 +55,4 @@ El usuario técnico fue añadido como usuario autorizado del servicio.
 ### Token
 
 Se generó un token asociado al usuario técnico y al servicio web personalizado.
+<img width="2371" height="83" alt="image" src="https://github.com/user-attachments/assets/309f6325-666e-4ec7-a7ff-7ea9be147db4" />
