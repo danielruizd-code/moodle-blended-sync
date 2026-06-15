@@ -5,8 +5,6 @@ MOODLE_URL = os.environ["MOODLE_URL"].rstrip("/")
 TOKEN = os.environ["MOODLE_TOKEN"]
 
 COURSE_ID = 3267
-
-# Ojo: este es el ID interno de Moodle, no el "ID de cohorte" visible.
 COHORT_ID = 1
 
 def moodle_call(function, params):
